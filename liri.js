@@ -6,28 +6,51 @@ var axios = require("axios");
 
 var keys = require("./keys");
 
+var inquirer = require("inquirer");
+
 var spotify = new Spotify(keys.spotify);
 
-var command = process.argv[2];
-
-var nodeArgs = process.argv;
-
-var userInput = "";
-
-for (var i = 3; i < nodeArgs.length; i++) {
-
-    if (i > 3 && i < nodeArgs.length) {
-        userInput = userInput + "+" + nodeArgs[i];
-    } else {
-        userInput += nodeArgs[i];
-
-    }
-}
-
-var queryUrl = "https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp";
 
 
-if (command === "concert-this") {
+var userInput;
+
+
+inquirer
+    .prompt([
+
+        {
+            type: "list",
+            message: "Please choose what type of search you would like to execute...",
+            choices: ["Concerts", "Songs", "Movies"],
+            name: "execution"
+        },
+        {
+            type: "input",
+            message: "What would you like to search today?",
+            name: "input"
+        }
+
+    ])
+    .then(function (inquirerResponse) {
+
+        userInput = inquirerResponse.input
+
+        if (inquirerResponse.execution === "Concerts") {
+            concertThis();
+        } else if (inquirerResponse.execution === "Songs") {
+            spotifyThis();
+        } else if (inquirerResponse.execution === "Movies") {
+            movieThis();
+        } else console.log("Sorry, invalid input. Please re-run program...")
+    });
+
+
+
+
+function concertThis(err, data) {
+    console.log("Hello World!");
+    var queryUrl = "https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp";
+
     axios.get(queryUrl).then(
         function (response) {
 
@@ -42,9 +65,11 @@ if (command === "concert-this") {
             console.log(time);
         }
     );
-} else if (command === "spotify-this-song") {
-    spotify
-        .search({
+}
+
+
+function spotifyThis(err, data) {
+    spotify.search({
             type: 'track',
             query: userInput
         })
@@ -54,21 +79,27 @@ if (command === "concert-this") {
             song = (response.tracks.items[1].name);
             preview = (response.tracks.items[1].album.external_urls.spotify);
             album = (response.tracks.items[1].album.name);
+            console.log('');
             console.log("Artist: " + artist);
             console.log("Song Name: " + song);
             console.log("Album name: " + album);
             console.log("Click here to listen now! " + preview);
+            console.log('');
         })
         .catch(function (err) {
             console.log(err);
         });
-} else if (command === "movie-this") {
+}
 
+
+function movieThis(err, data) {
     var queryUrl = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy";
-    
+    console.log(queryUrl);
+
     axios.get(queryUrl).then(
         function (response) {
-
+            console.log(response);
+            debugger;
             var movieName = response.data.Title;
             var yearReleased = response.data.Year;
             var rated = response.data.Rated;
@@ -80,7 +111,7 @@ if (command === "concert-this") {
             var plot = response.data.Plot;
             var language = response.data.Language;
             var country = response.data.Country;
-            var rating = response.data.Ratings[1].Source + " " + response.data.Ratings[1].Value;
+            var rating = response.data.Ratings[0].Source + " " + response.data.Ratings[0].Value;
 
             console.log('');
             console.log('Movie Name: ' + movieName);
@@ -96,7 +127,9 @@ if (command === "concert-this") {
             console.log('Actors: ' + actors);
             console.log('Plot: ' + plot);
             console.log('');
-            
+
         }
-    );
+    ).catch(function (err) {
+        console.log(err);
+    });
 }
