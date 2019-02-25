@@ -1,6 +1,6 @@
 # Liri-Node-App
 
-LIRI is a Language Interpretation and Recognition Interface. Use LIRI to find out about a song, search for upcoming concets, search a movie, or just choose a random action from your own random file.
+LIRI is a Language Interpretation and Recognition Interface. Use LIRI to spotify search a song, search for upcoming concets, search a movie, or just choose a random action from your own random file.
 
 # Technologies Used
 
