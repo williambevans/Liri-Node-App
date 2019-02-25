@@ -15,11 +15,11 @@ LIRI is a Language Interpretation and Recognition Interface. Use LIRI to find ou
 * Axios
   * $ npm install axios
 * Dotenv
-  *
+  * npm install dotenv
 * Inquirer
-  *
+  * npm install inquirer
 * Node-Spotify-Api
-  *
+  * npm install --save node-spotify-api
   
 # Video Demo
 
