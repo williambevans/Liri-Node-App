@@ -12,4 +12,6 @@ LIRI is a Language Interpretation and Recognition Interface. Use LIRI to find ou
 
 # Video Clip 
 
+<p align="center"><img src="/img/demo.gif?raw=true"/></p>
+
 https://terminalizer.com/view/1c77c864713
