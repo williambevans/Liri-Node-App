@@ -9,3 +9,7 @@ LIRI is a Language Interpretation and Recognition Interface. Use LIRI to find ou
 * Twitter API (via twitter npm module)
 * Spotify API (via spotify npm module)
 * OMDb API (via request npm module)
+
+# Video Clip 
+
+https://terminalizer.com/view/1c77c864713
