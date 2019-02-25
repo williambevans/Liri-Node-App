@@ -10,6 +10,17 @@ LIRI is a Language Interpretation and Recognition Interface. Use LIRI to find ou
 * Spotify API (via spotify npm module)
 * OMDb API (via request npm module)
 
+# Dependencies
+
+* Axios
+  * $ npm install axios
+* Dotenv
+  *
+* Inquirer
+  *
+* Node-Spotify-Api
+  *
+  
 # Video Demo
 
 https://terminalizer.com/view/1c77c864713
